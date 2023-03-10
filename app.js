@@ -46,10 +46,12 @@ app.get("/images", (req, res) => {
     const extname = path.extname(file).toLowerCase();
     return extname === ".jpg" || extname === ".jpeg" || extname === ".png";
   });
-  images = images.map(
+  let cloneImages = JSON.parse(JSON.stringify(images))
+  images = cloneImages.map(
     (filename) => `http://localhost:9998/uploads/${filename}`
   );
-  res.status(200).json({ images });
+  const images_rn = cloneImages.map((filename) => `http:10.0.2.2:9998/uploads/${filename}`)
+  res.status(200).json({ images, images_rn });
 });
 
 app.listen(9998, () => {
