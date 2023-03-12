@@ -54,6 +54,24 @@ app.get("/images", (req, res) => {
   res.status(200).json({ images, images_rn });
 });
 
+// 删除所有的图片
+app.get('/deleteUploads', (req, res) => {
+  const directory = 'uploads/';
+
+  // 读取uploads目录下的所有文件和文件夹
+  fs.readdir(directory, (err, files) => {
+    if (err) throw err;
+    // 遍历每个文件和文件夹，并删除
+    for (const file of files) {
+      const filePath = directory + file;
+      // 如果是文件则直接删除
+        fs.unlinkSync(filePath);
+    }
+    // 返回成功响应
+    res.status(200).send('All uploads have been deleted.');
+  });
+});
+
 app.listen(9998, () => {
   console.log("图片上传服务已启动");
 });
