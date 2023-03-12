@@ -4,6 +4,11 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 
+const uploadFolder = './uploads';
+if (!fs.existsSync(uploadFolder)) {
+  fs.mkdirSync(uploadFolder);
+}
+
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, "uploads")));
