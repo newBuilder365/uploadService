@@ -34,7 +34,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
   }
 
   // 图片上传成功
-  const imageUrl = `http://localhost:9998/uploads/${file.filename}`;
+  const imageUrl = `http://114.116.22.167:9998/uploads/${file.filename}`;
   res.status(200).json({ imageUrl });
 });
 
@@ -53,9 +53,9 @@ app.get("/images", (req, res) => {
   });
   let cloneImages = JSON.parse(JSON.stringify(images))
   images = cloneImages.map(
-    (filename) => `http://localhost:9998/uploads/${filename}`
+    (filename) => `http://114.116.22.167:9998/uploads/${filename}`
   );
-  const images_rn = cloneImages.map((filename) => `http:10.0.2.2:9998/uploads/${filename}`)
+  const images_rn = cloneImages.map((filename) => `http://114.116.22.167:9998/uploads/${filename}`)
   res.status(200).json({ images, images_rn });
 });
 
